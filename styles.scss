@@ -1,0 +1,55 @@
+/* dependencies */
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import "~bootstrap/scss/bootstrap";
+
+/* local imports */
+@import "./styles/variables";
+@import "./styles/fonts";
+@import "./styles/base";
+
+.moviesGrid {
+  flex-wrap: wrap;
+}
+h1 {
+  margin-top: 5px;
+  color: rgb(184, 23, 23);
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+img {
+  height: 300px;
+  width: 220px;
+  margin: 5px;
+}
+img.imgEmpty {
+  background-color: rgb(94, 131, 138);
+  height: 300px;
+  width: 220px;
+  margin: 5px;
+}
+
+.popUpContainer {
+  position: fixed;
+  top: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(245, 245, 245, 0.5);
+}
+.popUpInfos {
+  margin: auto;
+  margin-top: 10vh;
+  padding: 0;
+  width: 60vw;
+  height: 80vh;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+}
+.btnRecent {
+  background-color: black;
+  font-size: 1.5rem;
+  color: rgb(184, 23, 23);
+  border: 2px solid rgb(184, 23, 23);
+  border-radius: 5px;
+}
