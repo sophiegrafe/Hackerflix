@@ -5,12 +5,40 @@ import { movies } from './src/movies';
 /** *************************************Affichage**************************** */
 
 /* traitement header*/
+//version vt
 const header = `
-<header>
+<header>  
   <h1>Films on the theme of hacking</h1>
-  <button class="btnRecent">Recent Film Only</button>
 </header>
 `;
+
+/* pffff/Grrrr pas trouvé mieux ...*/
+const btnRecent = `
+<button id="btnRecent">
+  <span>R</span>
+  <span>e</span>
+  <span>c</span>
+  <span>e</span>
+  <span>n</span>
+  <span>t</span>
+  <div class="blackSpace"></div>
+  <span>F</span>
+  <span>i</span>
+  <span>l</span>
+  <span>m</span>
+  <div class="blackSpace"></div>
+  <span>O</span>
+  <span>n</span>
+  <span>l</span>
+  <span>y</span>  
+</button>`;
+
+//version hz
+/* <header>
+  <h1>Films on the theme of hacking</h1>
+  <button id="btnRecent">Recent Film Only</button>
+</header>
+`; */
 
 /*traitement main*/
 let main = '<main>';
@@ -20,10 +48,10 @@ let moviesGrid = '<section class="moviesGrid">';
 movies.forEach((movie)=>{
   if (movie.img) {
     moviesGrid += `  
-    <img src="posters/${movie.imdb}.jpg" id="${movie.imdb}" alt="movie poster">
+    <img src="posters/${movie.imdb}.jpg" class="poster" id="${movie.imdb}" alt="movie poster">
    `;
   } else {
-    moviesGrid += `<img class="imgEmpty" id="${movie.imdb}">`;
+    moviesGrid += `<img src="posters/no-poster.jpg" class="poster" id="${movie.imdb}">`;
   }
 });
 moviesGrid += '</section>';
@@ -34,12 +62,13 @@ main += moviesGrid + '</main>';
 
 /*affichage*/
 const app = document.getElementById("app");
-app.innerHTML += header + main;
+app.innerHTML += header + btnRecent + main;
 
-/** *************************************Fonctions/envents**************************** */
+/** *************************************Fonctions/events**************************** */
 
 /* popup */
-// afficher la popUpInfo avec un delegate
+ /*afficher la popUpInfo avec un delegate*/
+
 document.body.addEventListener('click', (e) => {
   if (e.target.matches('img')) {           
     movies.forEach((movie) => {        
@@ -48,11 +77,11 @@ document.body.addEventListener('click', (e) => {
         <div class="popUpContainer">
           <div class="popUpInfos">
             <i class="far fa-times-circle"></i>
-            <h3> Title: ${movie.title}</h3>
-            <p> Genres: </br> ${movie.genres} </p>
-            <p> Year: ${movie.year}</p>
-            <p> Note: ${movie.note}</p>
-            <p> Plot: </br> ${movie.plot} </p>
+            <h3>${movie.title}</h3>
+            <p id="movie_year">${movie.year}</p>
+            <p>${movie.genres}</p>
+            <p> ${movie.plot}</p>
+            <p> note: ${movie.note} / 10</p>
           </div>
         </div> `;
         app.innerHTML += popUpInfosFilm;
@@ -61,19 +90,10 @@ document.body.addEventListener('click', (e) => {
   }
 });
 
-// fermer la popup avec un delegate
+ /*fermer la popup avec un delegate*/
 
-//version 1 si pas fond pour empêcher "surclique" et empilement de popup
-// document.body.addEventListener("click", (e) => {
-//   if (e.target.matches(".fa-times-circle")) {
-//     console.log(e);
-//     const popupInfoToRemove = document.querySelectorAll(".popUpInfos");    
-//     const lastEntry = popupInfoToRemove[popupInfoToRemove.length - 1];       
-//     lastEntry.remove();
-//   }
-// });
-
-//version 2 avec le div container/écran sous la popup
+   /*version 2 avec le div écran sous la popup pour interdire
+   le surclique et l'empilement de popup*/
 
 document.body.addEventListener("click", (e) => {
   if (e.target.matches(".fa-times-circle")) {    
@@ -81,3 +101,78 @@ document.body.addEventListener("click", (e) => {
     popupInfoToRemove.remove();
   }
 });
+
+   /*version 1 si pas fond pour empêcher "surclique" et empilement de popup*/
+
+/*document.body.addEventListener("click", (e) => {
+  if (e.target.matches(".fa-times-circle")) {     
+    const popupInfoToRemove = document.querySelectorAll(".popUpInfos");    
+    const lastEntry = popupInfoToRemove[popupInfoToRemove.length - 1];       
+    lastEntry.remove();
+  }
+});*/
+
+/*bouton recent film only*/
+// cacher les films antérieur à 2000
+const btnRecentEvent = document.getElementById("btnRecent");
+btnRecentEvent.addEventListener('click', () => {
+    const posterList = document.querySelectorAll(".poster");
+    for (const movie of movies) {
+      posterList.forEach(poster =>{
+        if (poster.id === movie.imdb) {
+            const movieYears = movie.year;
+            if (movieYears < 2000){
+              poster.style.display="none";
+            }
+          }  
+      });
+    }
+    btnRecentEvent.innerHTML= `
+    <button id="show_all">
+      <span>S</span>
+      <span>h</span>
+      <span>o</span>
+      <span>w</span>
+      <div class="blackSpace"></div>
+      <span>A</span>
+      <span>l</span>
+      <span>l</span>      
+    </button>`;
+});
+
+// Révéler tous les films
+const btnShowAll = document.getElementById("show_all");
+btnShowAll.addEventListener("click", () => {
+  const posterList = document.querySelectorAll(".poster");
+  for (const movie of movies) {
+    posterList.forEach((poster) => {
+      if (poster.id === movie.imdb) {
+        const movieYears = movie.year;
+        if (movieYears < 2000) {
+          poster.style.display = "none";
+        }
+      }
+    });
+  }
+  btnRecentEvent.innerHTML = `
+    <button id="btnRecent">
+      <span>R</span>
+      <span>e</span>
+      <span>c</span>
+      <span>e</span>
+      <span>n</span>
+      <span>t</span>
+      <div class="blackSpace"></div>
+      <span>F</span>
+      <span>i</span>
+      <span>l</span>
+      <span>m</span>
+      <div class="blackSpace"></div>
+      <span>O</span>
+      <span>n</span>
+      <span>l</span>
+      <span>y</span>  
+  </button>`;
+});
+
+

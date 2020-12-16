@@ -7,26 +7,57 @@
 @import "./styles/fonts";
 @import "./styles/base";
 
+header {
+  width: 100%;
+  padding: 0;
+  border: 1px solid greenyellow;
+}
+
+main {
+  width: 100%;
+  border: 1px solid pink;
+}
+
 .moviesGrid {
   flex-wrap: wrap;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid greenyellow;
 }
 h1 {
-  margin-top: 5px;
+  margin: auto;
+  width: 100%;
+  min-width: 340px;
   color: rgb(184, 23, 23);
   font-weight: 1000;
   text-transform: uppercase;
+  border: 1px solid greenyellow;
+}
+@media only screen and (max-width: 600px) {
+  h1 {
+    margin: auto;
+    padding: 0;
+    width: 100%;
+    min-width: 340px;
+    color: rgb(184, 23, 23);
+    font-weight: 800;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    border: 1px solid greenyellow;
+  }
 }
 img {
   height: 300px;
   width: 220px;
   margin: 5px;
+  border: 1px solid purple;
 }
-img.imgEmpty {
-  background-color: rgb(94, 131, 138);
-  height: 300px;
-  width: 220px;
-  margin: 5px;
-}
+// img.imgEmpty {
+//   background-color: rgb(94, 131, 138);
+//   height: 300px;
+//   width: 220px;
+//   margin: 5px;
+// }
 
 .popUpContainer {
   position: fixed;
@@ -46,10 +77,44 @@ img.imgEmpty {
   color: black;
   font-size: 16px;
 }
-.btnRecent {
+#btnRecent {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50px;
+  right: 20px;
   background-color: black;
-  font-size: 1.5rem;
+  padding: 3px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
   color: rgb(184, 23, 23);
   border: 2px solid rgb(184, 23, 23);
   border-radius: 5px;
+  .blackSpace {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+  }
+}
+
+#show_all {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50px;
+  right: 20px;
+  background-color: black;
+  padding: 3px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgb(184, 23, 23);
+  border: 2px solid rgb(184, 23, 23);
+  border-radius: 5px;
+  .blackSpace {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+  }
 }
