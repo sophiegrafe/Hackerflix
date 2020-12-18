@@ -12,7 +12,7 @@ const header = `
 </header>
 `;
 
-/* pffff/Grrrr pas trouvé mieux ...*/
+/* ...*/
 const btnRecent = `
 <button id="btnRecent">
   <span>R</span>
@@ -149,7 +149,7 @@ btnShowAll.addEventListener("click", () => {
       if (poster.id === movie.imdb) {
         const movieYears = movie.year;
         if (movieYears < 2000) {
-          poster.style.display = "none";
+          poster.style.display = "inline";
         }
       }
     });
